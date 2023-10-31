@@ -1,10 +1,13 @@
+import Footer from "./components/Footer";
+import Gallery from "./components/Gallery";
+import Header from "./components/Header";
 
-function App() {
+const App = () => {
   return (
-    <div className="app">
-      <header className="app-header">
-        daf
-      </header>
+    <div className="app container mx-auto mt-10">
+      <Header/>
+        <Gallery/>
+      <Footer/>
     </div>
   );
 }
