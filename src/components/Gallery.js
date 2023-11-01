@@ -49,12 +49,17 @@ const Gallery = () => {
           <div className="grid grid-cols-5 gap-5">
             {gallery.map((image, index) => (
               <div key={image.id} className={`relative ${index === 0 ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'}`} >
-                <img
-                  src={image.img}
-                  alt={`Product-${image.id}`}
-                  className="w-full h-auto cursor-pointer border border-gray-400 rounded-xl"
-                  onClick={() => imageClickHandler(image.id)}
-                />
+                <div className='relative group'>
+                  <img
+                    src={image.img}
+                    alt={`Product-${image.id}`}
+                    className={`w-full h-auto cursor-pointer border border-gray-400 rounded-xl ${selected.includes(image.id) && 'opacity-50'}`}
+                  />
+                  <div 
+                    className={`w-full h-full bg-black absolute top-0 left-0 cursor-pointer rounded-xl opacity-0 ${!selected.includes(image.id) && 'group-hover:opacity-40 transition-opacity duration-300'} `}
+                    onClick={() => imageClickHandler(image.id)}
+                  ></div>
+                </div>
                 <div className="absolute top-2 left-3">
                   <input 
                     type="checkbox"
