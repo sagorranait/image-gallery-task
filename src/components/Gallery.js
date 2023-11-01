@@ -1,6 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Gallery = () => {
+  const [images, setImages] = useState([]);
+  const [selected, setSelected] = useState([]);
+
+  useEffect(() => {
+    axios.get('data.json')
+    .then((response) => {
+      setImages(response.data);
+    });
+  }, []);
+
+  const handleImageClick = (id) => {
+    const isSelected = selected.includes(id);
+    isSelected ? setSelected(selected.filter((imageId) => imageId !== id)) : setSelected([...selected, id]);
+  };
+
+
   return (
     <div className='w-4/6 mx-auto bg-white shadow rounded-lg'>
       <div className='border-b'>
@@ -14,7 +31,28 @@ const Gallery = () => {
           </button>
         </div>
       </div>
-      <div className='py-3 px-8'>Body</div>
+      <div className='py-8 px-8'>
+        <div className="grid grid-cols-5 gap-5">
+          {images.map((image, index) => (
+            <div key={image.id} className={`relative ${index === 0 ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'}`} >
+              <img
+                src={image.img}
+                alt={`Product-${image.id}`}
+                className="w-full h-auto cursor-pointer border rounded-xl"
+                onClick={() => handleImageClick(image.id)}
+              />
+              <div className="absolute top-2 left-3">
+                <input 
+                  type="checkbox"
+                  className="mr-1"
+                  checked={selected.includes(image.id)}
+                  onChange={()=>handleImageClick(image.id)}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
