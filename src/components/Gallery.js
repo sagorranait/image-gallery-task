@@ -26,7 +26,10 @@ const Gallery = () => {
   };
 
   const imageDeleteHandler = () => {
-    console.log('delete');
+    const removeSet = new Set(selected);
+    const result = gallery.filter(image => !removeSet.has(image.id));
+    setGallery(result);
+    setSelected([]);
   }
 
   const uploadHandler = (event) => {
@@ -83,7 +86,7 @@ const Gallery = () => {
               </div>
             ))}
             <form>
-              <div className={`${gallery.length === 0 ? 'w-36 h-36' : 'w-full h-full'} relative group flex justify-center items-center`}>
+              <div className={`${gallery.length === (0 || 1) && 'w-36 h-36'} w-full h-full relative group flex justify-center items-center`}>
                 <div className="absolute inset-0 w-full h-full rounded-xl border border-dashed border-gray-400 bg-opacity-80 backdrop-blur-xl"></div>
                 <input
                   className="relative z-10 opacity-0 h-full w-full cursor-pointer" 
