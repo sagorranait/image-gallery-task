@@ -4,9 +4,30 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #e9eef5;
-  font-family: 'Poppins', sans-serif;
+
+@layer base {
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #e9eef5;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .image-ghost {
+    opacity: 0.7;
+    border: 1px solid #c8cacf;
+    border-radius: 12px;
+    background-color: #fff;
+  }
+
+  .image-ghost img {
+    opacity: 0; /* Hide the image element */
+  }
+  
+  .image-ghost input[type="checkbox"] {
+    opacity: 0 !important;
+    display: none; /* Hide the input element */
+  }  
 }
+
+

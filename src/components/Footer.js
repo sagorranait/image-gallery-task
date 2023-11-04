@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='pt-8 text-center'>
+    <div className='m-3 pt-3 text-center md:m-0 md:pt-8'>
       <p className='text-gray-500 text-xs'>
         By uploading your files or using our service you agree with our 
         <span className='font-semibold underline cursor-pointer pl-1'>Terms of Service</span> and 

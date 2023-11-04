@@ -29,10 +29,21 @@ const Gallery = () => {
   useEffect(() => {
     if (galleryRef.current && !loading) {
       new Sortable(galleryRef.current, {
+        sort: false,
+        group: 'gallery',
+        draggable: ".image-item",
+        ghostClass: 'image-ghost',
+        forceFallback: true,
+        touchStartThreshold: 10,
         animation: 150,
+        onEnd: (event) => {
+          const newGalleryOrder = [...gallery];
+          newGalleryOrder.splice(event.newIndex, 0, newGalleryOrder.splice(event.oldIndex, 1)[0]);
+          setGallery(newGalleryOrder);
+        }
       });
     }
-  }, [loading]);
+  }, [loading, gallery]);
 
   const imageDeleteHandler = () => {
     const removeSet = new Set(selected);
@@ -47,34 +58,37 @@ const Gallery = () => {
   };
 
   return (
-    <div className='w-8/12 mx-auto bg-white shadow rounded-lg'>
+    <div className='w-11/12 lg:w-11/12 xl:w-9/12 2xl:w-8/12 mx-auto bg-white shadow rounded-lg'>
       <Header selected={selected} onSelected={()=> setSelected([])} onDelete={imageDeleteHandler} />      
       <div className='p-7' >
         { loading ? <Skeleton/> : 
-          <div className="grid grid-cols-5 gap-5" ref={galleryRef}>
-            { gallery.map((image, index) => (
-              <div key={image.id} className={`relative ${index === 0 ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'}`} >
-                <div className="relative group">
-                  <div className="w-full h-auto cursor-grab overflow-hidden border border-gray-400 rounded-xl">
-                    <img src={image.img} alt={`Product-${image.id}`} className={`w-full h-auto ${selected.includes(image.id) && 'opacity-40'}`} />
-                  </div>
-                  <div 
-                    className={`w-full h-full bg-black absolute top-0 left-0 cursor-pointer rounded-xl opacity-0 ${!selected.includes(image.id) && 'group-hover:opacity-40 transition-opacity duration-300'}`}
-                    onClick={() => imageClickHandler(image.id)}
-                  ></div>
-                </div>
-                <div className="absolute top-2 left-3">
-                  <input
-                    type="checkbox"
-                    className="mr-1 h-4 w-4"
-                    checked={selected.includes(image.id)}
-                    onChange={() => imageClickHandler(image.id)}
-                  />
-                </div>
-              </div>
-            ))}
-            <Upload lenght={gallery.length} />
-          </div>
+         <div className="grid grid-cols-3 gap-2 md:grid-cols-5 md:gap-5" ref={galleryRef}>
+         { gallery.map((image, index) => (
+           <div key={image.id} className={`image-item relative
+              ${index === 0 ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'}`} 
+            >
+             <div className="relative group">
+              <div className="w-full h-auto cursor-grab overflow-hidden border border-gray-400 rounded-xl">
+                 <img src={image.img} alt={`Product-${image.id}`} className={`w-full h-auto ${selected.includes(image.id) && 'opacity-40'}`} />
+               </div>
+               <div
+                 className={`w-full h-full bg-black absolute top-0 left-0 cursor-pointer rounded-xl opacity-0 ${!selected.includes(image.id) && 'group-hover:opacity-40 transition-opacity duration-300'}`}
+                 onClick={() => imageClickHandler(image.id)}
+               ></div>
+             </div>
+             <div className="absolute top-2 left-3">
+               <input
+                 type="checkbox"
+                 className="mr-1 h-4 w-4"
+                 checked={selected.includes(image.id)}
+                 onChange={() => imageClickHandler(image.id)}
+               />
+             </div>
+           </div>
+         ))}
+         {/* Image Upload from */}
+         <Upload />
+       </div>
         }
       </div>
     </div>
