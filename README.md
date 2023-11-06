@@ -1,15 +1,12 @@
-# Getting Started with Create React App
+## Image Gallery Task
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A responsive image gallery using React JS with the following features: reordering, deleting multiple images, and setting a feature image.
 
-## Available Scripts
+<p align="center"><img src="https://i.imgur.com/7lDaZ0N.png" alt="project-image"></p>
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
+ - <b>Gallery Layout:</b> I have used the grid layout for the image gallery. There is a feature image larger than the others' image.
+ - <b>Sorting:</b> The gallery images have a reordering functionality that allows users to rearrange the order of images in the gallery. For reordering images, The user can drag and drop.
+ - <b>Deleting Multiple Images:</b> Users are allowed to select multiple images and delete them.
+ - <b>Setting Feature Image:</b> Users are allowed to set a feature image by sorting. The featured image is visually distinct from the other images.
+ - <b>User Experience:</b> Image-Gallery is mobile-friendly and compatible with various devices, including smartphones and tablets.

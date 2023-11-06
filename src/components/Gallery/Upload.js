@@ -2,11 +2,6 @@ import React from 'react'
 
 const Upload = () => {
 
-  const uploadHandler = (event) => {
-    const selectedFile = event.target.files[0];
-    console.log(selectedFile);
-  }
-
   return (
     <form>
       <div className="w-full h-full md:h-28 lg:h-40 xl:h-40 2xl:h-44 relative group flex justify-center items-center">
@@ -15,7 +10,7 @@ const Upload = () => {
           className="relative z-10 opacity-0 h-full w-full cursor-pointer" 
           type="file"
           name='image'
-          onChange={uploadHandler}
+          onChange={()=>{}}
         />
         <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full m-auo flex items-center justify-center p-3">
             <div className="space-y-1 md:space-y-3 lg:space-y-6 flex items-center justify-center flex-col">

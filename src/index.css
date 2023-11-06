@@ -28,6 +28,10 @@
     opacity: 0 !important;
     display: none; /* Hide the input element */
   }  
+
+  .image-ghost .image-drop{
+    display: none;
+  }
 }
 
 
